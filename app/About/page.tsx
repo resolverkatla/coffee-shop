@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { CSSProperties } from 'react';
 
 const containerStyle: CSSProperties = {
-  backgroundColor: '#f5f5dc', // Light brown background color
+  backgroundColor: '#f5e9e2', // Light brown background color
   color: '#4a4a4a', // Darker text color for contrast
   boxSizing: 'border-box',
   padding: '1rem',
@@ -58,12 +58,16 @@ const textStyle: CSSProperties = {
 };
 
 const headingStyle: CSSProperties = {
-  fontSize: '2.5rem',
+  fontStyle: 'bold',
+  fontSize: '5rem',
   marginBottom: '1rem',
+  color: '#6b4e3d',
+  fontWeight: 'bold',
 };
 
 const paragraphStyle: CSSProperties = {
-  fontSize: '1.2rem',
+  padding: '2rem',
+  fontSize: '1.4rem',
   lineHeight: '1.6',
   margin: '0 0 1rem 0', // Add bottom margin
 };
