@@ -22,13 +22,13 @@ function Home() {
         </div>
 
         {/* Right Section: Image */}
-        <div className="hidden md:block w-full md:w-1/2 pl-40 mt-12">
+        <div className="hidden md:block w-full md:w-1/2 pl-8 mt-12 mb-16">
           <Image
-            src="/images/Coffee.png" // Path to the iced coffee image
+            src="/images/Display.png" // Path to the iced coffee image
             alt="Iced Coffee"
             className="rounded-xl object-cover"
-            width={350}
-            height={350}
+            width={800}
+            height={800}
             priority={true} // Optimizes image loading
           />
         </div>
