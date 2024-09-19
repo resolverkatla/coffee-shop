@@ -12,13 +12,13 @@ export default function Navbar() {
                 <a href="/" className="hover:text-yellow-500">Home</a>
               </li>
               <li>
-                <a href="/menu" className="hover:text-yellow-500">Menu</a>
+                <a href="/Menu" className="hover:text-yellow-500">Menu</a>
               </li>
               <li>
-                <a href="/about" className="hover:text-yellow-500">About Us</a>
+                <a href="/About" className="hover:text-yellow-500">About Us</a>
               </li>
               <li>
-                <a href="/contact" className="hover:text-yellow-500">Contact</a>
+                <a href="/Contact" className="hover:text-yellow-500">Contact</a>
               </li>
             </ul>
           </div>

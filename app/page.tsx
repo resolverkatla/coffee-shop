@@ -14,7 +14,7 @@ function Home() {
         </div>
 
         {/* Right Section: Image */}
-        <div className="hidden md:block w-full md:w-1/2 pl-12">
+        <div className="hidden md:block w-full md:w-1/2 pl-12 ">
           <Image
             src={"/images/Coffee.png"} // Path to the iced coffee image
             alt="Iced Coffee"
