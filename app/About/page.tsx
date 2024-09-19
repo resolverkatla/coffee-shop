@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { CSSProperties } from 'react';
 
 const containerStyle: CSSProperties = {
-  backgroundColor: '#f5f5dc', // Light brown background color
+  backgroundColor: '#f5e9e2', // Light brown background color
   color: '#4a4a4a', // Darker text color for contrast
   display: 'flex',
   flexDirection: 'row', // Horizontal layout
@@ -27,32 +27,74 @@ const imageElementStyle: CSSProperties = {
 };
 
 const textBoxStyle: CSSProperties = {
-  backgroundColor: '#f5f5dc', // Same color as the page background
+  backgroundColor: '#faf0e6', // Slightly darker than the page background
   padding: '2rem',
-  marginRight: '2rem',
-  borderRadius: '8px', // Rounded corners
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Box shadow
+  borderRadius: '20px', // Rounded corners
+  boxShadow: '0 4px 8px rgba(0.1, 0.1, 0.1, 0.1)', // Box shadow
   maxWidth: '100%', // Full width of the text container
   margin: '0 auto', // Center the box horizontally
 };
 
 const textContainerStyle: CSSProperties = {
+  marginRight: '2rem', // Added margin-right
   flex: '2', // Allow text container to take more space
   maxWidth: '50%', // Limit text container width to half of the container
   textAlign: 'center' as const, // Center align text inside the box
 };
 
 const headingStyle: CSSProperties = {
-  fontSize: '2.5rem',
+  fontStyle: 'bold',
+  fontSize: '5rem',
   marginBottom: '1rem',
+  color: '#6b4e3d',
+  fontWeight: 'bold',
 };
 
 const paragraphStyle: CSSProperties = {
-  fontSize: '1.2rem',
+  padding: '2rem',
+  fontSize: '1.4rem',
   lineHeight: '1.6',
   maxWidth: '100%', // Full width of the text container
+  color: '#8d6e5a',
   margin: '0',
 };
+
+const galleryContainerStyle: CSSProperties = {
+  display: 'flex',
+  flexWrap: 'wrap', // Allow wrapping of items
+  justifyContent: 'center', // Center the items horizontally
+  gap: '1rem', // Gap between gallery items
+  marginTop: '5rem', // Space between text box and gallery
+};
+
+const profileCardStyle: CSSProperties = {
+  width: '150px',
+  height: '150px',
+  backgroundColor: '#faf0e6',
+  borderRadius: '50%',
+  overflow: 'hidden',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Box shadow for profile cards
+};
+
+const profileImageStyle: CSSProperties = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover', // Cover the profile card while maintaining aspect ratio
+};
+
+const nameStyle: CSSProperties = {
+  textAlign: 'center',
+  marginTop: '0.5rem',
+  fontSize: '1rem',
+  color: '#4a4a4a',
+};
+
+const profiles = [
+  { name: 'Alice', image: 'profile1.jpg' },
+  { name: 'Bob', image: 'profile2.jpg' },
+  { name: 'Charlie', image: 'profile3.jpg' },
+  { name: 'Diana', image: 'profile4.jpg' },
+];
 
 const About: FC = () => {
   return (
@@ -76,6 +118,18 @@ const About: FC = () => {
           <p style={paragraphStyle}>
             Join us at Brewed Bliss and indulge in the ultimate iced coffee experience. We can’t wait to serve you!
           </p>
+        </div>
+        <div style={galleryContainerStyle}>
+          {profiles.map((profile) => (
+            <div key={profile.name} style={profileCardStyle}>
+              <img
+                src={`menu_pics/${profile.image}`}
+                alt={profile.name}
+                style={profileImageStyle}
+              />
+              <div style={nameStyle}>{profile.name}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
