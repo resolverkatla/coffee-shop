@@ -1,5 +1,4 @@
 // app/layout.tsx
-import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -23,11 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} antialiased`}>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+    <html lang="en" className="h-full">
+      <body className="h-full flex flex-col">
+        <Navbar /> {/* Fixed navbar at the top */}
+        <main className="flex-1">{children}</main> {/* Main content */}
       </body>
     </html>
   );
