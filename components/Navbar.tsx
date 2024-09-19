@@ -1,7 +1,7 @@
 // components/Navbar.tsx
 export default function Navbar() {
     return (
-      <nav className="bg-brown-800 text-white p-4">
+      <nav className="bg-brown-800 text-white p-4 fixed top-0 w-full z-10">
         <div className="container mx-auto flex justify-between items-center">
           <div className="text-2xl font-bold">
             Coffee<span className="text-yellow-500">Shop</span>
