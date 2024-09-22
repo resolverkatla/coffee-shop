@@ -28,11 +28,11 @@ export default function Navbar() {
 
           {/* Cart Icon */}
           <div className="ml-6">
-            <a href="/cart" className="relative hover:text-yellow-500">
+            <a href="/Cart" className="relative hover:text-yellow-500">
               <FaShoppingCart size={24} />
               {/* Optionally, add a cart item count indicator */}
               <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                3
+                2
               </span>
             </a>
           </div>

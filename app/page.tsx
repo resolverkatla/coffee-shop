@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 function Home() {
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-b from-[#f5e9e2] to-[#d1c4b7]">
+    <div className="h-screen flex flex-col bg-cover bg-center bg-[url('/images/Background.jpg')]">
       {/* Main Content */}
       <main className="flex-1 flex items-center justify-center p-8 pt-12">
         {/* Left Section: Text */}
