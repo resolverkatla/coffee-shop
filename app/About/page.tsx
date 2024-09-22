@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import { CSSProperties } from 'react';
+import { CSSProperties, FC } from 'react';
 
 const containerStyle: CSSProperties = {
   backgroundColor: '#f5e9e2', // Light brown background color
@@ -92,7 +91,7 @@ const About: FC = () => {
       <div style={aboutUsSectionStyle}>
         <h1 style={headingStyle}>About Us</h1>
         <p style={aboutUsParagraphStyle}>
-          Welcome to 'Brewed Bliss', Located in the heart of Iloilo City, we are a specialty coffee shop dedicated to showcasing the rich and diverse coffee flavors the Philippines has to offer. 
+          Welcome to &apos;Brewed Bliss&apos;, Located in the heart of Iloilo City, we are a specialty coffee shop dedicated to showcasing the rich and diverse coffee flavors the Philippines has to offer. 
         </p>
         <p style={aboutUsParagraphStyle}>
           Join us on a journey of taste and discovery as we explore the vibrant coffee culture of the Philippines. From classic blends to single-origin beans, our menu offers something for every palate.
