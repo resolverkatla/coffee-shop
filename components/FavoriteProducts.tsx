@@ -3,7 +3,7 @@ import { FaStar } from 'react-icons/fa'; // Import star icon from react-icons
 
 export default function FavoriteProducts() {
   return (
-    <section className="py-12 bg-gradient-to-b from-[#f5e9e2] to-[#d1c4b7] -mt-12">
+    <section className="py-12 bg-gradient-to-b from-[#f5e9e2] to-[#d1c4b7] -mt-14">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-[#6b4e3d] mb-8 text-center">Favorite Products</h2>
 

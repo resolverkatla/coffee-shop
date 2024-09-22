@@ -1,7 +1,8 @@
 import FavoriteProducts from '@/components/FavoriteProducts';
+import FloatingOrderButton from '@/components/FloatingOrderButton';
 import Footer from '@/components/Footer';
 import ReviewGrid from '@/components/ReviewGrid';
-import Image from 'next/image'; // Import Image component from Next.js for optimization
+import Image from 'next/image';
 
 function Home() {
   return (
@@ -22,7 +23,7 @@ function Home() {
         </div>
 
         {/* Right Section: Image */}
-        <div className="hidden md:block w-full md:w-1/2 pl-8 mt-12 mb-16">
+        <div className="hidden md:block w-full md:w-1/2 pl-8 mt-12 mb-20">
           <Image
             src="/images/Display.png" // Path to the iced coffee image
             alt="Iced Coffee"
@@ -38,6 +39,7 @@ function Home() {
       <FavoriteProducts />
       <ReviewGrid />
       <Footer />
+      <FloatingOrderButton />
     </div>
   );
 }
