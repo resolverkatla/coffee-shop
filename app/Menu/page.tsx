@@ -3,20 +3,22 @@
 import { useState } from 'react'; // Import useState hook
 import Footer from '@/components/Footer';
 import Image from 'next/image'; // Import Image component from Next.js for optimization
-import { FaStar, FaSearch,} from 'react-icons/fa'; // Add FaSearch  icons
+import { FaStar, FaSearch } from 'react-icons/fa'; // Add FaSearch icons
 
 function Menu() {
-  // State to store search query and selected size
+  // State to store search query, selected size, and dietary preference
   const [searchQuery, setSearchQuery] = useState('');
   const [sizeFilter, setSizeFilter] = useState('');
+  const [dietaryFilter, setDietaryFilter] = useState(''); // New state for dietary filter
 
-  // Menu items data with size property added
+  // Menu items data with size and dietary properties added
   const menuItems = [
     {
       name: "Iced Latte",
       description: "Chilled espresso with milk and ice.",
       price: "₱150",
-      size: "medium", // New size property
+      size: "medium",
+      dietary: "vegan", // New dietary property
       image: "/menu_pics/iced-espresso.jpg",
       rating: 4.5,
       reviews: ["Refreshing and cool! Perfect for hot days.", "Good balance of coffee and milk."]
@@ -26,6 +28,7 @@ function Menu() {
       description: "Rich espresso with steamed milk foam.",
       price: "₱130",
       size: "small",
+      dietary: "gluten-free", // New dietary property
       image: "/menu_pics/iced-macchiato.jpg",
       rating: 4.6,
       reviews: ["Perfect foam!", "Rich and creamy."]
@@ -35,6 +38,7 @@ function Menu() {
       description: "Strong and bold espresso coffee shot.",
       price: "₱110",
       size: "small",
+      dietary: "gluten-free",
       image: "/menu_pics/iced-espresso.jpg",
       rating: 4.4,
       reviews: ["A strong kick!", "Bold taste, love it."]
@@ -44,18 +48,20 @@ function Menu() {
       description: "Espresso with chocolate and steamed milk.",
       price: "₱170",
       size: "large",
+      dietary: "none",
       image: "/menu_pics/iced-mocha.jpg",
       rating: 4.7,
       reviews: ["Great blend of coffee and chocolate!", "Absolutely delicious."]
     },
   ];
 
-  // Function to filter menu items based on search query and size
+  // Function to filter menu items based on search query, size, and dietary preference
   const filteredItems = menuItems.filter(item =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    (sizeFilter ? item.size === sizeFilter : true)
+    (sizeFilter ? item.size === sizeFilter : true) &&
+    (dietaryFilter ? item.dietary === dietaryFilter : true) // Include dietary filter
   );
- 
+
   // Star rating function
   const getStars = (rating: number) => {
     const fullStars = Math.floor(rating);
@@ -73,7 +79,7 @@ function Menu() {
       </>
     );
   };
- 
+
   // Render menu items
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#f5e9e2] to-[#d1c4b7] mt-14">
@@ -95,25 +101,37 @@ function Menu() {
               placeholder="Search by name..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-8 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#6b4e3d] w-full text-[#6b4e3d]" // Changed font color
+              className="pl-8 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#6b4e3d] w-full text-[#6b4e3d]"
             />
           </div>
 
-           {/* Size Filter */}
-           <select
+          {/* Size Filter */}
+          <select
             value={sizeFilter}
             onChange={(e) => setSizeFilter(e.target.value)}
-            className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#6b4e3d] text-[#6b4e3d]" // Changed font color
+            className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#6b4e3d] text-[#6b4e3d]"
           >
             <option value="">All Sizes</option>
             <option value="small">Small</option>
             <option value="medium">Medium</option>
             <option value="large">Large</option>
           </select>
+
+          {/* Dietary Preference Filter */}
+          <select
+            value={dietaryFilter}
+            onChange={(e) => setDietaryFilter(e.target.value)}
+            className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#6b4e3d] text-[#6b4e3d]"
+          >
+            <option value="">All Dietary Preferences</option>
+            <option value="vegan">Vegan</option>
+            <option value="gluten-free">Gluten-Free</option>
+            <option value="none">None</option>
+          </select>
         </div>
 
-                {/* Menu Items Section */} 
-              <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
+        {/* Menu Items Section */}
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
           {filteredItems.map((item, index) => (
             <div
               key={index}
@@ -167,8 +185,8 @@ function Menu() {
           ))}
         </div>
 
-            {/* Menu Items Section */} 
-            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
+        {/* Menu Items Section */}
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
           {filteredItems.map((item, index) => (
             <div
               key={index}
@@ -221,8 +239,9 @@ function Menu() {
             </div>
           ))}
         </div>
-            {/* Menu Items Section */} 
-            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
+
+          {/* Menu Items Section */}
+          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
           {filteredItems.map((item, index) => (
             <div
               key={index}
@@ -275,8 +294,9 @@ function Menu() {
             </div>
           ))}
         </div>
-        
+
       </main>
+      {/* Footer section from components */}
       <Footer />
     </div>
   );
