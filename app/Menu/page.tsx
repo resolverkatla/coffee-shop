@@ -32,7 +32,7 @@ function Menu() {
     },
     {
       name: "Espresso",
-      description: "Strong and bold espresso shot.",
+      description: "Strong and bold espresso coffee shot.",
       price: "₱110",
       size: "small",
       image: "/menu_pics/iced-espresso.jpg",
