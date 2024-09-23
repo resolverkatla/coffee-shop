@@ -55,7 +55,7 @@ const styles: { [key: string]: CSSProperties } = {
     justifyContent: 'center',
     minHeight: '100vh',
     padding: '2rem',
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#f5e9e2', // Light brown background color
   },
   heading: {
     fontSize: '2.5rem',
@@ -116,7 +116,7 @@ const styles: { [key: string]: CSSProperties } = {
   button: {
     padding: '0.75rem 2rem',
     fontSize: '1rem',
-    backgroundColor: '#5d4037',
+    backgroundColor: '#45260f',
     color: '#fff',
     border: 'none',
     borderRadius: '5px',
@@ -150,7 +150,7 @@ const styles: { [key: string]: CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     fontSize: '1.1rem',
-    color: '#5d4037',
+    color: '#45260f',
     textDecoration: 'none',
     transition: 'color 0.3s ease',
   },
