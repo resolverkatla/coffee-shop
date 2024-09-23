@@ -6,7 +6,7 @@ import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa'; // Import 
 const ContactUs = () => {
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>Get in Touch</h1>
+      <h1 style={styles.heading}>TALK TO US!</h1>
       <p style={styles.subHeading}>
         We’d love to hear from you! Whether you have questions or just want to say hi.
       </p>
@@ -62,6 +62,7 @@ const styles: { [key: string]: CSSProperties } = {
     fontWeight: 'bold',
     color: '#4a4a4a',
     marginBottom: '1rem',
+    marginTop: '1rem',
   },
   subHeading: {
     fontSize: '1.2rem',
