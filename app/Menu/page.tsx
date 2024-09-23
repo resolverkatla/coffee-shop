@@ -1,13 +1,22 @@
+"use client";
+
+import { useState } from 'react'; // Import useState hook
 import Footer from '@/components/Footer';
 import Image from 'next/image'; // Import Image component from Next.js for optimization
-import { FaStar } from 'react-icons/fa';
+import { FaStar, FaSearch,} from 'react-icons/fa'; // Add FaSearch  icons
 
 function Menu() {
+  // State to store search query and selected size
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sizeFilter, setSizeFilter] = useState('');
+
+  // Menu items data with size property added
   const menuItems = [
     {
       name: "Iced Latte",
       description: "Chilled espresso with milk and ice.",
       price: "₱150",
+      size: "medium", // New size property
       image: "/menu_pics/iced-espresso.jpg",
       rating: 4.5,
       reviews: ["Refreshing and cool! Perfect for hot days.", "Good balance of coffee and milk."]
@@ -16,6 +25,7 @@ function Menu() {
       name: "Cappuccino",
       description: "Rich espresso with steamed milk foam.",
       price: "₱130",
+      size: "small",
       image: "/menu_pics/iced-macchiato.jpg",
       rating: 4.6,
       reviews: ["Perfect foam!", "Rich and creamy."]
@@ -24,6 +34,7 @@ function Menu() {
       name: "Espresso",
       description: "Strong and bold espresso shot.",
       price: "₱110",
+      size: "small",
       image: "/menu_pics/iced-espresso.jpg",
       rating: 4.4,
       reviews: ["A strong kick!", "Bold taste, love it."]
@@ -32,23 +43,30 @@ function Menu() {
       name: "Mocha",
       description: "Espresso with chocolate and steamed milk.",
       price: "₱170",
+      size: "large",
       image: "/menu_pics/iced-mocha.jpg",
       rating: 4.7,
       reviews: ["Great blend of coffee and chocolate!", "Absolutely delicious."]
     },
   ];
 
+  // Function to filter menu items based on search query and size
+  const filteredItems = menuItems.filter(item =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+    (sizeFilter ? item.size === sizeFilter : true)
+  );
+
   const getStars = (rating: number) => {
-    const fullStars = Math.floor(rating); // Full stars based on the integer part of the rating
-    const halfStar = rating % 1 !== 0; // Check if there's a half star
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); // Remaining stars will be empty
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
     return (
       <>
         {[...Array(fullStars)].map((_, i) => (
           <FaStar key={i} className="text-yellow-500" />
         ))}
-        {halfStar && <FaStar className="text-yellow-500 half-star" />} {/* Placeholder class for half star if needed */}
+        {halfStar && <FaStar className="text-yellow-500 half-star" />}
         {[...Array(emptyStars)].map((_, i) => (
           <FaStar key={i} className="text-gray-400" />
         ))}
@@ -58,24 +76,50 @@ function Menu() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#f5e9e2] to-[#d1c4b7] mt-14">
+
       <main className="flex-1 flex flex-col items-center justify-center p-8">
         {/* Header Section */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-10">
           <h1 className="text-5xl font-extrabold text-[#6b4e3d]">Our Menu</h1>
-          <p className="text-lg text-[#8d6e5a] mt-4">
-            Enjoy a variety of coffee brewed to perfection.
-          </p>
+          <p className="text-lg text-[#8d6e5a] mt-4">Enjoy a variety of coffee brewed to perfection.</p>
         </div>
 
-        {/* Menu Items Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10">
-          {menuItems.map((item, index) => (
+        {/* Search and Filter Section */}
+        <div className="mb-8 flex items-center space-x-4">
+          {/* Search Bar */}
+          <div className="relative">
+            <FaSearch className="absolute top-2 left-2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search by name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-8 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#6b4e3d] w-full text-[#6b4e3d]" // Changed font color
+            />
+          </div>
+
+           {/* Size Filter */}
+           <select
+            value={sizeFilter}
+            onChange={(e) => setSizeFilter(e.target.value)}
+            className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#6b4e3d] text-[#6b4e3d]" // Changed font color
+          >
+            <option value="">All Sizes</option>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+
+                {/* Menu Items Section */} 
+              <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
+          {filteredItems.map((item, index) => (
             <div
               key={index}
               className="relative bg-white rounded-xl shadow transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col items-center justify-between"
               style={{ minHeight: "360px" }}
             >
-              {/* Image fits container exactly */}
+              {/* Image */}
               <div className="w-full h-44 relative overflow-hidden rounded-t-lg m-0">
                 <Image
                   src={item.image}
@@ -96,7 +140,7 @@ function Menu() {
                     {item.price}
                   </p>
 
-                  {/* Corrected Star Ratings */}
+                  {/* Star Ratings */}
                   <div className="flex items-center mt-2">
                     {getStars(item.rating)}
                     <span className="ml-2 text-sm text-gray-600">({item.rating.toFixed(1)})</span>
@@ -108,7 +152,7 @@ function Menu() {
                   Order Now
                 </button>
 
-                {/* Static Review Section */}
+                {/* Review Section */}
                 <div className="text-sm text-left text-gray-600 mt-4">
                   <p className="font-semibold">Reviews:</p>
                   <ul>
@@ -121,16 +165,16 @@ function Menu() {
             </div>
           ))}
         </div>
-          
-         {/* Menu Items Section */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10">
-          {menuItems.map((item, index) => (
+
+            {/* Menu Items Section */} 
+            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
+          {filteredItems.map((item, index) => (
             <div
               key={index}
               className="relative bg-white rounded-xl shadow transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col items-center justify-between"
               style={{ minHeight: "360px" }}
             >
-              {/* Image fits container exactly */}
+              {/* Image */}
               <div className="w-full h-44 relative overflow-hidden rounded-t-lg m-0">
                 <Image
                   src={item.image}
@@ -151,7 +195,7 @@ function Menu() {
                     {item.price}
                   </p>
 
-                  {/* Corrected Star Ratings */}
+                  {/* Star Ratings */}
                   <div className="flex items-center mt-2">
                     {getStars(item.rating)}
                     <span className="ml-2 text-sm text-gray-600">({item.rating.toFixed(1)})</span>
@@ -163,7 +207,7 @@ function Menu() {
                   Order Now
                 </button>
 
-                {/* Static Review Section */}
+                {/* Review Section */}
                 <div className="text-sm text-left text-gray-600 mt-4">
                   <p className="font-semibold">Reviews:</p>
                   <ul>
@@ -176,16 +220,15 @@ function Menu() {
             </div>
           ))}
         </div>
-
-         {/* Menu Items Section */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10">
-          {menuItems.map((item, index) => (
+            {/* Menu Items Section */} 
+            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 mb-10 ${filteredItems.length < 4 ? "justify-center" : ""}`}>
+          {filteredItems.map((item, index) => (
             <div
               key={index}
               className="relative bg-white rounded-xl shadow transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col items-center justify-between"
               style={{ minHeight: "360px" }}
             >
-              {/* Image fits container exactly */}
+              {/* Image */}
               <div className="w-full h-44 relative overflow-hidden rounded-t-lg m-0">
                 <Image
                   src={item.image}
@@ -206,7 +249,7 @@ function Menu() {
                     {item.price}
                   </p>
 
-                  {/* Corrected Star Ratings */}
+                  {/* Star Ratings */}
                   <div className="flex items-center mt-2">
                     {getStars(item.rating)}
                     <span className="ml-2 text-sm text-gray-600">({item.rating.toFixed(1)})</span>
@@ -218,7 +261,7 @@ function Menu() {
                   Order Now
                 </button>
 
-                {/* Static Review Section */}
+                {/* Review Section */}
                 <div className="text-sm text-left text-gray-600 mt-4">
                   <p className="font-semibold">Reviews:</p>
                   <ul>
@@ -231,7 +274,6 @@ function Menu() {
             </div>
           ))}
         </div>
-
         
       </main>
       <Footer />
