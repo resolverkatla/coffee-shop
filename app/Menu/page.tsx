@@ -55,25 +55,26 @@ function Menu() {
     item.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
     (sizeFilter ? item.size === sizeFilter : true)
   );
-
+ 
+  // Star rating function
   const getStars = (rating: number) => {
     const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 !== 0;
+    const halfStar = rating % 1 >= 0.5; // Check if there's at least half
     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-
     return (
       <>
         {[...Array(fullStars)].map((_, i) => (
-          <FaStar key={i} className="text-yellow-500" />
+          <FaStar key={`full-${i}`} className="text-yellow-500" />
         ))}
-        {halfStar && <FaStar className="text-yellow-500 half-star" />}
+        {halfStar && <FaStar key="half" className="text-yellow-500 half-star" />}
         {[...Array(emptyStars)].map((_, i) => (
-          <FaStar key={i} className="text-gray-400" />
+          <FaStar key={`empty-${i}`} className="text-gray-400" />
         ))}
       </>
     );
   };
-
+ 
+  // Render menu items
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#f5e9e2] to-[#d1c4b7] mt-14">
 
